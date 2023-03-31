@@ -1,0 +1,61 @@
+# Configfile for the NIH8 DataSet
+_target_: src.datamodules.Datamodules.MN_IXI_combined
+
+cfg:
+  name: MN_IXI_combined
+  path:
+    pathBase: ${data_dir}
+
+    MN_IXI:
+      dataDir: ${data_dir}/UAD_Brain/combined_MN_IXI/t1/
+      IDs:
+        train: ${data_dir}/splits/combined_train.csv
+        val: ${data_dir}/splits/combined_val.csv
+        test: ${data_dir}/splits/combined_test.csv
+
+    Stroke:
+      dataDir: ${data_dir}/UAD_Brain/Stroke/t1/
+      IDs:
+        test: ${data_dir}/splits/Stroke_test.csv
+        val: ${data_dir}/splits/Stroke_val.csv
+
+    Brats19:
+      dataDir: ${data_dir}/UAD_Brain/Brats19/t1/
+      IDs:
+        test: ${data_dir}/splits/Brats19_test.csv
+        val: ${data_dir}/splits/Brats19_val.csv
+
+
+
+  imageDim: [70,95,79] # DxHxW
+  rescaleFactor: [0.5, 0.5, 0.5]
+  interRes: [12,10,10] #[HxWxD]
+  cropMode: 'isotropic'
+  spatialDims: 2D
+
+  preLoad: True
+  curvatureFlow: True
+  percentile: True
+
+  pad: True
+
+  # Augmentations
+  randomRotate: False
+  rotateDegree: 5
+  horizontalFlip: False
+  randomBrightness: False
+  brightnessRange: (0.75,1.25)
+  randomContrast: False
+  contrastRange: (0.75,1.25)
+  showAllSlices: True
+  
+
+  num_workers: 1
+  batch_size: 16
+  lr : 0.0001
+  # Evaluation
+  resizedEvaluation: True
+  testsets: # specify which test sets to evaluate!
+  - MN_IXI_eval
+  - Stroke
+  - Brats19

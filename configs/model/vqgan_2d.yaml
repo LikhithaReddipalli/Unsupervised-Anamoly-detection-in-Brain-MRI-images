@@ -1,0 +1,48 @@
+_target_: src.models.vqgan_2d.vqgan_2d_trainer
+
+cfg:
+  name: vqgan_2d
+  ## Data
+  imageDim: ${datamodule.cfg.imageDim}
+  rescaleFactor: ${datamodule.cfg.rescaleFactor}
+  interRes: ${datamodule.cfg.interRes}
+  cropMode: ${datamodule.cfg.cropMode}
+  spatialDims: ${datamodule.cfg.spatialDims}
+  resizedEvaluation: ${datamodule.cfg.resizedEvaluation}
+
+  ## Architecture
+  enc_channels: [128, 128, 128, 256, 256, 512]
+  enc_num_res_blocks : 2
+  enc_resolution : 256
+  dec_channels : [512, 256, 256, 128, 128]
+  dec_num_res_blocks : 3
+  dec_resolution: 16
+  image_channels: 1
+  latent_dim: 64
+  attn_resolutions : [16]
+  num_codebook_vectors : 256
+  beta: 0.25
+
+
+  ## Training
+
+  lossStrategy: 'sum'
+  lr: ${datamodule.cfg.lr}
+
+  # LR Scheduling
+  scheduleLR: False
+  patienceLR: 10
+
+  # Early Stopping
+  earlyStopping: False
+  patienceStopping: 50
+
+  ## Evaluation
+  saveOutputImages: True
+  evalSeg: True
+
+  ## General postprocessing
+  pad: ${datamodule.cfg.pad}
+  erodeBrainmask: True
+  medianFiltering: True
+  threshold: auto # 'auto' for autothresholding, any number for manually setting

@@ -1,0 +1,45 @@
+_target_: src.models.vqvae_2d.vqvae_2d_trainer
+
+cfg:
+  name: vqvae_2d
+  ## Data 
+  imageDim: ${datamodule.cfg.imageDim} 
+  rescaleFactor: ${datamodule.cfg.rescaleFactor}
+  interRes: ${datamodule.cfg.interRes}
+  cropMode: ${datamodule.cfg.cropMode}
+  spatialDims: ${datamodule.cfg.spatialDims}
+  resizedEvaluation: ${datamodule.cfg.resizedEvaluation}
+
+  ## Architecture
+  in_channels: 1
+  num_hiddens: 128
+  num_residual_hiddens: 32
+  num_residual_layers: 2
+  num_embeddings: 64
+  embedding_dim: 256
+  commitment_cost: 0.25 #beta
+
+
+  ## Training
+  beta: 1
+  lossStrategy: 'sum'
+  lr: ${datamodule.cfg.lr}
+
+  # LR Scheduling
+  scheduleLR: False 
+  patienceLR: 10
+
+  # Early Stopping
+  earlyStopping: False 
+  patienceStopping: 50
+
+  ## Evaluation
+  saveOutputImages: True  
+  evalSeg: True
+
+
+  ## General postprocessing
+  pad: ${datamodule.cfg.pad}
+  erodeBrainmask: True
+  medianFiltering: True
+  threshold: auto # 'auto' for autothresholding, any number for manually setting

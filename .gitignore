@@ -1,0 +1,21 @@
+
+### VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+**/.vscode
+
+# JetBrains
+.idea/
+
+# Lightning-Hydra-Template
+logs/
+wandb/
+.env
+.autoenv
+pc_environment.env
+thesis-env.yml
+Data/

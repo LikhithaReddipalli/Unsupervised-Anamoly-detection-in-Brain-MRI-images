@@ -1,0 +1,23 @@
+# @package _global_
+
+defaults:
+  - override /trainer: default.yaml # override trainer to null so it's not loaded from main config defaults...
+  - override /model: vqgan_2d.yaml
+  - override /datamodule: MixedNormals.yaml
+  - override /callbacks: 
+    - checkpoint.yaml
+
+  - override /logger: 
+    - wandb
+    - csv
+
+name: ExpName
+# we override default configurations with nulls to prevent them from loading at all
+# instead we define all modules and their paths directly in this config,
+# so everything is stored in one place
+
+seed: null
+
+
+
+

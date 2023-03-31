@@ -1,0 +1,5 @@
+_target_: src.models.Resnet50.LitResnet50
+
+cfg:
+  num_classes: ${datamodule.cfg.num_classes}
+  

@@ -1,0 +1,22 @@
+# @package _global_
+
+# to execute this experiment run:
+# python run.py experiment=example_full.yaml
+
+defaults:
+  - override /trainer: default.yaml # override trainer to null so it's not loaded from main config defaults...
+  - override /model: vae_2d.yaml
+  - override /datamodule: MixedNormals.yaml
+  - override /callbacks: 
+    - checkpoint.yaml
+
+  - override /logger: 
+    - wandb
+    - csv
+
+name : latentspace_sweep
+seed: null
+
+
+
+

@@ -1,0 +1,44 @@
+_target_: src.models.vae_2d.vae_2d_trainer
+
+cfg:
+  name: vae_2d
+  ## Data
+  imageDim: ${datamodule.cfg.imageDim}
+  rescaleFactor: ${datamodule.cfg.rescaleFactor}
+  interRes: ${datamodule.cfg.interRes}
+  cropMode: ${datamodule.cfg.cropMode}
+  spatialDims: ${datamodule.cfg.spatialDims}
+  resizedEvaluation: ${datamodule.cfg.resizedEvaluation}
+
+  ## Architecture
+  kernelSize: 5
+  latentSize: 128
+  fmapsEnc: [1, 128]
+  fmapsDec: [128, 32]
+  dropRate: 0.2
+  bottleneckFmaps: 16
+  EncoderArch: "unified"
+
+  ## Training
+  beta: 1
+  lossStrategy: 'sum'
+  lr: ${datamodule.cfg.lr}
+
+  # LR Scheduling
+  scheduleLR: False
+  patienceLR: 10
+
+  # Early Stopping
+  earlyStopping: False
+  patienceStopping: 50
+
+  ## Evaluation
+  saveOutputImages: True
+  evalSeg: True
+
+
+  ## General postprocessing
+  pad: ${datamodule.cfg.pad}
+  erodeBrainmask: True
+  medianFiltering: True
+  threshold: auto # 'auto' for autothresholding, any number for manually setting

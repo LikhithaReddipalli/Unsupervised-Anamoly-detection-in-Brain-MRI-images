@@ -1,0 +1,12 @@
+model_checkpoint:
+    _target_: pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint
+    monitor: 'val/Loss_comb'  #"val/mean_auc"
+    save_top_k: 3
+    auto_insert_metric_name: False
+    save_last: True
+    mode: "min"
+    # prefix: ''
+    # every_n_train_steps: 100
+    dirpath: "checkpoints/"
+    filename: "epoch-{epoch}_step-{step}_loss-{val/Loss_comb:.2f}"
+    #period: 1
